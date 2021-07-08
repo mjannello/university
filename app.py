@@ -1,6 +1,9 @@
 from flask import Flask
 
 from db import db
+from api import api
+from views.student_views import ns_students
+
 from models.career import Career
 from models.grade import GradesReport
 from models.student import Student
@@ -13,7 +16,8 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.secret_key = 'secret string'
 
 db.init_app(app)
-
+api.init_app(app)
+api.add_namespace(ns_students)
 
 if __name__ == '__main__':
     with app.app_context():
