@@ -1,10 +1,12 @@
-from models.grade import GradesReport
+from db import db
 
 
-class Student:
-    def __init__(self, first_name, last_name, university_id):
-        self.first_name = first_name
-        self.last_name = last_name
-        self.university_id = university_id
-        self.careers = []
-        self.report_card = GradesReport()
+class Student(db.Model):
+    __tablename__ = 'student'
+    id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(80), nullable=False)
+    last_name = db.Column(db.String(80), nullable=False)
+    university_id = db.Column(db.Integer(), nullable=False)
+    careers = []
+    report_card = db.relationship('GradesReport', back_populates='student')
+
